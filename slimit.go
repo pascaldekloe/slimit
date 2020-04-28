@@ -36,15 +36,3 @@ func SplitAt(s string, i int) (head, remainder string) {
 
 // isTail returns whether c is a continuation of a muli-byte sequence.
 func isTail(c byte) bool { return c>>6 == 0b10 }
-
-// NBytes limits the string to a maximum number of bytes.
-// If a cut-off would interrupt a UTF-8 byte sequence, then the
-// incomplete tail is left out.
-//
-// The return is a prefix of s for any n.
-// The return is empty when n ≤ 0.
-// The return is s when n ≥ len(s).
-func NBytes(s string, n int) string {
-	head, _ := SplitAt(s, n)
-	return head
-}
