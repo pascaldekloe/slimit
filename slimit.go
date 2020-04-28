@@ -23,12 +23,28 @@ func NBytes(s string, n int) string {
 	if len(s) <= n {
 		return s
 	}
-
-	for i := n; i > 0; i-- {
-		if s[i]>>6 != 2 || s[i-1] < 128 {
-			return s[:i]
-		}
+	if n <= 0 {
+		return ""
 	}
+	if isTail(s[n]) {
+		// cut-off in multi-byte sequence
+		for i := n - 1; i >= 0; i-- {
+			if isTail(s[i]) {
+				continue
+			}
 
-	return ""
+			// Check whether the tail actually reaches s[n].
+			// The most significant bits are 0b110… with 2 byte
+			// sequences, 0b1110… with 3 and 0b11110… with 4.
+			if byte(int8(-128)>>(n-i)) <= s[i] {
+				return s[:i]
+			}
+			break
+		}
+		// broken sequence
+	}
+	return s[:n]
 }
+
+// isTail returns whether c is a continuation of a muli-byte sequence.
+func isTail(c byte) bool { return c>>6 == 0b10 }
