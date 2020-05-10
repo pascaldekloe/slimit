@@ -3,7 +3,7 @@
 
 ## About
 
-… size boundaries on UTF-8 data for the Go progamming language.
+… size cuts on UTF-8 data for the Go progamming language.
 
 This is free and unencumbered software released into the
 [public domain](https://creativecommons.org/publicdomain/zero/1.0).

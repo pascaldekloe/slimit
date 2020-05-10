@@ -1,4 +1,4 @@
-// Package slimit provides size boundaries on UTF-8 data.
+// Package slimit provides size cuts on UTF-8 data.
 package slimit
 
 import "unicode/utf8"
